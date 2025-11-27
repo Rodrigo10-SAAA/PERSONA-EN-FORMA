@@ -3,7 +3,6 @@ import streamlit as st
 import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 
-st.set_page_config(page_title="Condición física", page_icon="💪")
 
 st.write("# Predicción sobre la condición física de una persona")
 st.image(
@@ -67,12 +66,14 @@ classifier.fit(X, y)
 
 st.subheader("Predicción")
 
-if st.button("Calcular"):
+df_model = df[FEATURE_COLS]
+pred = classifier.predict(df_model)[0]
 
-    df_model = df[FEATURE_COLS]
-    pred = classifier.predict(df_model)[0]
+if pred == 1:
+    st.write("LA PERSONA ESTA EN FORMA")
+else:
+    st.write("LA PERSONA NO ESTA EN FORMA")
 
-    if pred == 1:
-        st.success("LA PERSONA ESTA EN FORMA")
-    else:
-        st.error("LA PERSONA NO ESRA EN FORMA")
+
+
+ 
